@@ -11,10 +11,7 @@ def decision_tree_classification():
     # Acquire related fields from the data set
     feature_cols, train_inputs, test_inputs, train_outputs, test_outputs = read_data_set()
 
-    # Create decision tree classifier. Default criteria for quality of splitting, i.e., attribute importance
-    # is gini but for sticking with the criterion we've seen in the class, I've used entropy as criterion.
-    # For the max_depth, best value depends on the data set. I've tried depths from 2 to 10 for get some insights.
-    # Most accuracy I was able to acquire was when depth = 5. That's why I've used max depth as 5.
+    # Create decision tree classifier.
     decision_tree = DecisionTreeClassifier(criterion="entropy", max_depth=5)
 
     # Train decision tree classifier with train data which is 80% of all the dataset.
@@ -76,13 +73,7 @@ def read_data_set():
     # Possible class names are R(Right), L(Left), B(Balanced)
     outputs = data_set.ClassName
 
-    # split data set. Use some portion of inputs and outputs to train the model (train_inputs, test_inputs)
-    # Use rest of the data set for evaluating the model (test_inputs, test_outputs)
-    # There is no best percentage of dividing the data set but as far as the examples I've seen, it is
-    # chosen between 70%-80%. I prefer to split the data set as 80% training and 20% test
-    # For the random state, it determines how to divide the data set. Each random_state value gives different data set,
-    # however it gives exact same input for each program execution. I want my program to generate same result for each
-    # run, that's why I set some integer(0 specifically) instead of None.
+    # split data set.
     train_inputs, test_inputs, train_outputs, test_outputs = train_test_split(inputs, outputs, test_size=0.2,
                                                                               random_state=0)
     return feature_cols, train_inputs, test_inputs, train_outputs, test_outputs
